@@ -1,0 +1,4 @@
+789;Lorem ipsum dolor sit amet;true;1000;10.00;5;true;E
+456;aliquip ex ea commodo consequat;true;5000;20.00;5;;A
+890;consectetur adipiscing elit;true;2000;20.00;6;false;E
+333;cillum dolore eu fugiat nulla pariatur;true;6000;40.00;6;;A
