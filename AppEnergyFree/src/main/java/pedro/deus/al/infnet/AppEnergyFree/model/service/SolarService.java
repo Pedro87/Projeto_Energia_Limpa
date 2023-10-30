@@ -1,19 +1,20 @@
 package pedro.deus.al.infnet.AppEnergyFree.model.service;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
+import org.springframework.stereotype.Service;
 import pedro.deus.al.infnet.AppEnergyFree.model.domain.Solar;
+import pedro.deus.al.infnet.AppEnergyFree.model.repository.SolarRepository;
 
+@Service
 public class SolarService {
-	private Map<Integer, Solar> mapaSolar = new HashMap<Integer, Solar>();
+	private SolarRepository solarRepository;
 
 	public void incluir(Solar solar) {
-		mapaSolar.put(solar.getCodigo(), solar);
+		solarRepository.save(solar);
 	}
-	
-	public Collection<Solar> obterLista(){	
-		return mapaSolar.values();
+
+	public Collection<Solar> obterLista(){
+		return (Collection<Solar>) solarRepository.findAll();
 	}
 }

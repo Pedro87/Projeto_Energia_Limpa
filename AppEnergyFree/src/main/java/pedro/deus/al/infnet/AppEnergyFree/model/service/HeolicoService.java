@@ -1,20 +1,21 @@
 package pedro.deus.al.infnet.AppEnergyFree.model.service;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
+
+import org.springframework.stereotype.Service;
 import pedro.deus.al.infnet.AppEnergyFree.model.domain.Heolica;
+import pedro.deus.al.infnet.AppEnergyFree.model.repository.HeolicaRepository;
 
-
+@Service
 public class HeolicoService {
-	private Map<Integer, Heolica> mapaHeolica = new HashMap<Integer, Heolica>();
+	private HeolicaRepository heolicaRepository;
 
 	public void incluir(Heolica heolica) {
-		mapaHeolica.put(heolica.getCodigo(), heolica);
+		heolicaRepository.save(heolica);
 	}
-	
-	public Collection<Heolica> obterLista(){	
-		return mapaHeolica.values();
+
+	public Collection<Heolica> obterLista() {
+		return (Collection<Heolica>) heolicaRepository.findAll();
 	}
 }

@@ -1,2 +1,2 @@
-456;aliquip ex ea commodo consequat;true;5000;20.00;5
-333;cillum dolore eu fugiat nulla pariatur;true;6000;40.00;6
+456;aliquip ex ea commodo consequat;true;5000;20.00;5;2
+333;cillum dolore eu fugiat nulla pariatur;true;6000;40.00;6;3

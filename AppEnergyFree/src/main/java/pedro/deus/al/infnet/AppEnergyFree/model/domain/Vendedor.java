@@ -1,11 +1,19 @@
 package pedro.deus.al.infnet.AppEnergyFree.model.domain;
 
 import java.util.List;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "TVendedor")
 public class Vendedor {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 	private String nome;
 	private String cpf;
 	private String email;
+	@OneToMany
 	private List<Produto> produtos;
 	
 	@Override
@@ -37,4 +45,6 @@ public class Vendedor {
 	public void setProdutos(List<Produto> produtos) {
 		this.produtos = produtos;
 	}
+	public Integer getId() {return id;}
+	public void setId(Integer id) {this.id = id;}
 }

@@ -1,19 +1,21 @@
 package pedro.deus.al.infnet.AppEnergyFree.model.service;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
+import org.springframework.stereotype.Service;
 import pedro.deus.al.infnet.AppEnergyFree.model.domain.Produto;
+import pedro.deus.al.infnet.AppEnergyFree.model.repository.ProdutoRepository;
 
+@Service
 public class ProdutoService {
-	private Map<Integer, Produto> mapaProduto = new HashMap<Integer, Produto>();
+
+	private ProdutoRepository produtoRepository;
 
 	public void incluir(Produto produto) {
-		mapaProduto.put(produto.getCodigo(), produto);
+		produtoRepository.save(produto);
 	}
 	
 	public Collection<Produto> obterLista(){	
-		return mapaProduto.values();
+		return (Collection<Produto>) produtoRepository.findAll();
 	}
 }

@@ -1,2 +1,2 @@
-789;Lorem ipsum dolor sit amet;true;1000;10.00;5;true
-890;consectetur adipiscing elit;true;2000;20.00;6;false
+789;Lorem ipsum dolor sit amet;true;1000;10.00;5;true;2
+890;consectetur adipiscing elit;true;2000;20.00;6;false;1

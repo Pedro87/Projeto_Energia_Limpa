@@ -1,5 +1,10 @@
 package pedro.deus.al.infnet.AppEnergyFree.model.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "THeolica")
 public class Heolica extends Produto {
 
 	private float Wats;

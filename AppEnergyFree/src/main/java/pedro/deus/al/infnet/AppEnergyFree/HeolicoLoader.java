@@ -11,6 +11,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import pedro.deus.al.infnet.AppEnergyFree.model.domain.Heolica;
+import pedro.deus.al.infnet.AppEnergyFree.model.domain.Vendedor;
 import pedro.deus.al.infnet.AppEnergyFree.model.service.HeolicoService;
 
 @Order(3)
@@ -22,7 +23,7 @@ public class HeolicoLoader implements ApplicationRunner {
 	
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
-		FileReader file = new FileReader("files/eletronico.txt");		
+		FileReader file = new FileReader("files/heolica.txt");
 		BufferedReader leitura = new BufferedReader(file);
 		
 		String linha = leitura.readLine();
@@ -41,6 +42,11 @@ public class HeolicoLoader implements ApplicationRunner {
 			heolico.setPreco(Float.valueOf(campos[3]));
 			heolico.setWats(Float.valueOf(campos[4]));
 			heolico.setTempoDeInstalacao(Integer.valueOf(campos[5]));
+
+			Vendedor vendedor = new Vendedor();
+			vendedor.setId(Integer.valueOf(campos[7]));
+
+			heolico.setVendedor(vendedor);
 			
 			heolicoService.incluir(heolico);
 			

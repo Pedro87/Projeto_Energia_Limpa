@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import pedro.deus.al.infnet.AppEnergyFree.model.domain.Heolica;
 import pedro.deus.al.infnet.AppEnergyFree.model.domain.Produto;
 import pedro.deus.al.infnet.AppEnergyFree.model.domain.Solar;
+import pedro.deus.al.infnet.AppEnergyFree.model.domain.Vendedor;
 import pedro.deus.al.infnet.AppEnergyFree.model.service.ProdutoService;
 
 @Order(2)
@@ -29,7 +30,7 @@ public class ProdutosLoaders implements ApplicationRunner {
 			String linha = leitura.readLine();
 		
 			String[] campos = null;
-		
+			Vendedor vendedor = new Vendedor();
 			while(linha != null) {
 				
 				campos = linha.split(";");
@@ -43,7 +44,9 @@ public class ProdutosLoaders implements ApplicationRunner {
 					heolico.setPreco(Float.valueOf(campos[3]));
 					heolico.setWats(Float.valueOf(campos[4]));
 					heolico.setTempoDeInstalacao(Integer.valueOf(campos[5]));
-					
+					vendedor.setId(Integer.valueOf(campos[7]));
+
+					heolico.setVendedor(vendedor);
 					produtoService.incluir(heolico);
 					
 					break;
@@ -57,7 +60,9 @@ public class ProdutosLoaders implements ApplicationRunner {
 					solar.setWats(Float.valueOf(campos[4]));
 					solar.setTempoDeInstalacao(Integer.valueOf(campos[5]));
 					solar.setPrecisaFundicao(Boolean.valueOf(campos[6]));
-					
+					vendedor.setId(Integer.valueOf(campos[7]));
+
+					solar.setVendedor(vendedor);
 					produtoService.incluir(solar);
 					
 					break;

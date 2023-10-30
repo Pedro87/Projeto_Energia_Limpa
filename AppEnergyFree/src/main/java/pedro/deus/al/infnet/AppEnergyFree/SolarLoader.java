@@ -10,6 +10,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import pedro.deus.al.infnet.AppEnergyFree.model.domain.Solar;
+import pedro.deus.al.infnet.AppEnergyFree.model.domain.Vendedor;
 import pedro.deus.al.infnet.AppEnergyFree.model.service.SolarService;
 
 @Order(4)
@@ -17,11 +18,11 @@ import pedro.deus.al.infnet.AppEnergyFree.model.service.SolarService;
 public class SolarLoader implements ApplicationRunner {
 
 	@Autowired
-	private SolarService SolarService;
+	private SolarService solarService;
 	
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
-		FileReader file = new FileReader("files/eletronico.txt");		
+		FileReader file = new FileReader("files/solar.txt");
 		BufferedReader leitura = new BufferedReader(file);
 		
 		String linha = leitura.readLine();
@@ -40,13 +41,17 @@ public class SolarLoader implements ApplicationRunner {
 			solar.setPreco(Float.valueOf(campos[3]));
 			solar.setWats(Float.valueOf(campos[4]));
 			solar.setTempoDeInstalacao(Integer.valueOf(campos[5]));
-			
-			SolarService.incluir(solar);
+			solar.setPrecisaFundicao(Boolean.valueOf(campos[6]));
+			Vendedor vendedor = new Vendedor();
+			vendedor.setId(Integer.valueOf(campos[7]));
+
+			solar.setVendedor(vendedor);
+			solarService.incluir(solar);
 			
 			linha = leitura.readLine();
 		}
 
-		for(Solar solar : SolarService.obterLista()) {
+		for(Solar solar : solarService.obterLista()) {
 			System.out.println("[Solar] " + solar);
 		}
 		
