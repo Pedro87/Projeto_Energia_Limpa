@@ -1,5 +1,6 @@
 package pedro.deus.al.infnet.AppEnergyFree.controller;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,20 +20,20 @@ public class AppController {
     private InformacaoService informacaoService;
 
     @GetMapping(value = "/")
-    public String showHome(Model model) {
+    public String showHome(@NotNull Model model) {
 
-        model.addAttribute("informacoes", informacaoService.obterLista());
+
 
         model.addAttribute("qtdeVendedor", vendedorService.obterQtde());
         model.addAttribute("qtdeProduto", produtoService.obterQtde());
         model.addAttribute("qtdeHeolico", heolicoService.obterQtde());
         model.addAttribute("qtdeSolar", solarService.obterQtde());
 
-        return "index";
+        return "home";
     }
 
     @GetMapping(value = "/produto/lista")
-    public String obterListaProduto(Model model) {
+    public String obterListaProduto(@NotNull Model model) {
 
         model.addAttribute("titulo", "Produtos:");
         model.addAttribute("listagem", produtoService.obterLista());
@@ -41,7 +42,7 @@ public class AppController {
     }
 
     @GetMapping(value = "/heolico/lista")
-    public String obterListaAlimenticio(Model model) {
+    public String obterListaAlimenticio(@NotNull Model model) {
 
         model.addAttribute("titulo", "Produtos Alimentícios:");
         model.addAttribute("listagem", heolicoService.obterLista());
@@ -50,7 +51,7 @@ public class AppController {
     }
 
     @GetMapping(value = "/solar/lista")
-    public String obterListaEletronico(Model model) {
+    public String obterListaEletronico(@NotNull Model model) {
 
         model.addAttribute("titulo", "Produtos Eletrônicos:");
         model.addAttribute("listagem", solarService.obterLista());

@@ -1,18 +1,17 @@
 package pedro.deus.al.infnet.AppEnergyFree;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-
 import pedro.deus.al.infnet.AppEnergyFree.model.domain.Endereco;
 import pedro.deus.al.infnet.AppEnergyFree.model.domain.Vendedor;
 import pedro.deus.al.infnet.AppEnergyFree.model.service.VendedorService;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 @Order(1)
 @Component 
