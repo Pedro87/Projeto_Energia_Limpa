@@ -1,13 +1,15 @@
 package pedro.deus.al.infnet.AppEnergyFree.model.service;
 
-import java.util.Collection;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pedro.deus.al.infnet.AppEnergyFree.model.domain.Solar;
 import pedro.deus.al.infnet.AppEnergyFree.model.repository.SolarRepository;
 
+import java.util.Collection;
+
 @Service
 public class SolarService {
+	@Autowired
 	private SolarRepository solarRepository;
 
 	public void incluir(Solar solar) {
@@ -16,5 +18,9 @@ public class SolarService {
 
 	public Collection<Solar> obterLista(){
 		return (Collection<Solar>) solarRepository.findAll();
+	}
+
+	public long obterQtde() {
+		return solarRepository.count();
 	}
 }

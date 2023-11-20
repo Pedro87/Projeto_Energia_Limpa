@@ -1,85 +1,113 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+         pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pos de Java</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: auto;
-            padding: 20px;
-        }
-
-        header {
-            background-color: #333;
-            color: #ffffff;
-            padding: 20px 0;
-            text-align: center;
-        }
-
-        h1 {
-            margin: 0;
-        }
-
-        .intro {
-            padding: 20px;
-            background-color: #ffffff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .course-info {
-            margin-top: 20px;
-            padding: 20px;
-            background-color: #ffffff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #007BFF;
-            color: #ffffff;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: background-color 0.3s;
-        }
-
-        .btn:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet">
+    <meta charset="ISO-8859-1">
+    <title>AppVenda</title>
 </head>
 <body>
-    <header>
-        <h1>POS em Arquitetura Java</h1>
-    </header>
-
-    <div class="container">
-        <div class="intro">
-            <h2>Bem-vindo a POS em Arquitetura Java!</h2>
-            <p>Java é uma das linguagens de programação mais populares do mundo e é usado para desenvolver aplicações de grande escala, aplicativos móveis e muito mais.</p>
-        </div>
-
-        <div class="course-info">
-            <h3>Informações do Projeto:</h3>
-            <ul>
-                <li>Projeto: JAVA</li>
-                <li>Versao: 17</li>
-                <li>Autor: Pedro Augusto de Deus</li>
-            </ul>
-
-            <a href="https://github.com/Pedro87/Projeto_Energia_Limpa" class="btn">Entre No Git</a>
-        </div>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="container-fluid">
+        <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link active" href="/">AppVenda</a>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="/vendedor/lista">Vendedores</a>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="/produto/lista">Produtos</a>
+            </li>
+            <li class="nav-item"><a class="nav-link"
+                                    href="/solar/lista">Solar</a></li>
+            <li class="nav-item"><a class="nav-link"
+                                    href="/heolico/lista">Heolico</a></li>
+        </ul>
+        <c:if test="${not empty listagem}">
+            <form class="d-flex" action="/${rota}/pesquisar">
+                <input class="form-control me-2" type="text" name="campoBusca"
+                       placeholder="Search">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form>
+        </c:if>
     </div>
+</nav>
+
+<div class="container mt-3">
+
+		<span class="badge rounded-pill bg-primary">Vendedor:
+            ${qtdeVendedor}</span> <span class="badge rounded-pill bg-secondary">Produto:
+    ${qtdeProduto}</span> <span class="badge rounded-pill bg-success">Solar:
+    ${qtdeSolar}</span> <span class="badge rounded-pill bg-danger">Heolico:
+    ${qtdeHeolico}</span>
+
+    <c:if test="${not empty listagem}">
+        <h2>AppVenda</h2>
+        <p>Gestão de vendas de produtos:</p>
+        <table class="table">
+            <thead class="table-dark">
+            <tr>
+                <th>${titulo}</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach var="item" items="${listagem}">
+                <tr>
+                    <td>${item}</td>
+                    <td><a href="/${rota}/${item.id}/excluir">excluir</a></td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </c:if>
+
+
+    <c:if test="${empty listagem}">
+        <hr>
+        <form action="/informacao/incluir" method="post">
+            <div class="row">
+                <div class="col">
+                    <input type="text" class="form-control"
+                           placeholder="Entre com o campo" name="campo">
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control"
+                           placeholder="Entre com a descrição" name="descricao">
+                </div>
+                <div class="col">
+                    <button class="btn btn-primary" type="submit">Cadastrar</button>
+                </div>
+            </div>
+        </form>
+
+        <c:if test="${not empty informacoes}">
+            <hr>
+            <table class="table">
+                <thead class="table-dark">
+                <tr>
+                    <th>Informações:</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach var="item" items="${informacoes}">
+                    <tr>
+                        <td>${item}</td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+        </c:if>
+    </c:if>
+
+    <c:if test="${not empty objeto}">
+        <hr>
+        <div class="alert alert-success">
+            <strong>Sucesso!</strong> ${objeto}
+        </div>
+    </c:if>
+</div>
 </body>
 </html>
